@@ -1,0 +1,59 @@
+.DB_Segment_Main{
+    stroke-width:5;
+    }
+.DB_Item{
+    fill:none;
+    stroke:white;
+    stroke-width:1;
+    }
+.DB_Switch{
+    stroke-width:5;
+    stroke:red;
+}
+.DB_Switch_N, .DB_Switch_R{
+    stroke-width:5;
+    stroke:green;
+}
+.DB_Platform{
+    stroke-width:3;
+    
+}
+.DB_ControlArea text{
+    font-size: 36;
+    transform: scale(2,2);
+}
+@keyframes swithLost
+{
+    0% {stroke: red;}
+    49% {stroke: red;}
+    51% {stroke: black;}
+    100% {stroke: black;}
+}
+text{
+    fill: white;
+    stroke: white;
+    transform: translate(0,16px);
+    stroke-width:1;
+}
+/*失位*/
+.DB_Switch .DB_Swh_N{
+     animation: swithLost 2s 0s infinite;
+}
+.DB_Switch .DB_Swh_R{
+    animation: swithLost 2s 1s infinite;
+}
+/*定位*/
+.DB_Switch_N .DB_Swh_R{
+     display: none
+}
+
+/*反位*/
+.DB_Switch_R .DB_Swh_N{
+     display: none
+}
+
+
+#MianView{
+    background: black;
+    
+}
