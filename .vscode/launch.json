@@ -7,6 +7,16 @@
         {
             "type": "node",
             "request": "launch",
+            "name": ">viewSrc",
+            "program": "${workspaceRoot}/src/appSrv.ts",
+            "cwd": "${workspaceRoot}",
+            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
+            "sourceMaps": true,
+            "protocol":"inspector"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": ">TDBLoad",
             "program": "${workspaceRoot}/src/TDBLoad.ts",
             "cwd": "${workspaceRoot}",

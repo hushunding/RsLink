@@ -7,5 +7,7 @@
         "outDir": "dist"
     },
     "include":
-    ["src/**/*"]
+    ["src/**/*"],
+    "exclude":
+    ["src/**/ViewClient.ts"]
 }
