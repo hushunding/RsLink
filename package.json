@@ -4,7 +4,9 @@
   "description": "车车通信演示模型",
   "main": "none",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:client": "tsc -p ./src/View",
+    "build:client:watch": "tsc -p ./src/View -w"
   },
   "repository": {
     "type": "git",
@@ -18,5 +20,18 @@
   "bugs": {
     "url": "https://github.com/hushunding/RsLink/issues"
   },
-  "homepage": "https://github.com/hushunding/RsLink#readme"
+  "homepage": "https://github.com/hushunding/RsLink#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.16.4",
+    "@types/express": "^4.0.36",
+    "@types/jquery": "^3.2.6",
+    "@types/node": "^8.0.8",
+    "@types/xml2js": "^0.4.0",
+    "typescript": "~2"
+  }
 }

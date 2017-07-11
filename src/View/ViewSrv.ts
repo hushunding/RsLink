@@ -36,10 +36,7 @@ export class ViewSrv {
         app.use(bodyParser.json()); // for parsing application/json
         app.get('/getManView', (req: Express.Request, res: Express.Response) => res.send(svgdata))
         app.post('/viewCmd', (req: Express.Request, res: Express.Response) => this.defualtResp(req, res))
-        let server = app.listen(this.port, function () {
-            let host = server.address();
-            console.log(`设备${this.srvName}的View地址为 http://%s:%s`, host.address, host.port);
-        })
+        let server = app.listen(this.port, () => console.log(`设备${this.srvName}的View地址为 http://%s:%s`, server.address().address, server.address().port))
     }
 
     private defualtResp(req: Express.Request, res: Express.Response) {

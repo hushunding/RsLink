@@ -43,7 +43,7 @@ export class TDB extends TDBF.BIN {
             this.indexTables.push(indextabl);
         }
         if (this.fileInfo.IDS_VERSION !== TDBF.FormateVersion.c) {
-            console.warn("TS版本与文件版本不一致,TS:%x,TDB:%s", this.fileInfo.IDS_VERSION, TDBF.FormateVersion.t)
+            console.warn("TS版本与文件版本不一致,TS:%s,TDB:%s", TDBF.FormateVersion.t, this.fileInfo.IDS_VERSION.toString(16))
         }
         //获取安全区信息
         this.safeData = new TDBF.安全信息区();
@@ -119,7 +119,7 @@ export class LocPointP {
     SegmentID: number;
     Offset: number;
     SegmentObj: TDBF.SegmentEx
-    static FormLocPoint(loc: LocPoint, dataMap: Map<number, TDBF.IDataUnit>):LocPointP {
+    static FormLocPoint(loc: LocPoint, dataMap: Map<number, TDBF.IDataUnit>): LocPointP {
         let res = new LocPointP()
         res.Offset = loc.Offset
         res.SegmentID = loc.SegmentID
@@ -132,20 +132,18 @@ export class VectorLineP {
     dir: TDBF.Direction
     startP: LocPointP
     endP: LocPointP
-    static FormVectorLine(vector: VectorLine, dataMap: Map<number, TDBF.IDataUnit>) :VectorLineP{
+    static FormVectorLine(vector: VectorLine, dataMap: Map<number, TDBF.IDataUnit>): VectorLineP {
         let res = new VectorLineP()
         res.dir = vector.dir
-        res.startP =  LocPointP.FormLocPoint(vector.start, dataMap)
+        res.startP = LocPointP.FormLocPoint(vector.start, dataMap)
         res.endP = LocPointP.FormLocPoint(vector.end, dataMap)
         return res
     }
-    getNormalLine():VectorLineP
-    {
+    getNormalLine(): VectorLineP {
         let res = new VectorLineP()
         Object.assign(res, this)
         res.dir = TDBF.Direction.DIR_DN
-        if(this.dir = TDBF.Direction.DIR_UP)
-        {
+        if (this.dir = TDBF.Direction.DIR_UP) {
             res.startP = this.endP
             res.endP = this.startP
         }

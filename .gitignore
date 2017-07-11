@@ -2,3 +2,6 @@ node_modules
 dist
 res
 test*.*
+package-lock.json
+MyView/**/*.js
+MyView/**/*.map

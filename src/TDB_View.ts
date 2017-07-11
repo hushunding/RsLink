@@ -8,7 +8,7 @@ export function LinkTDBbView(tdbbin: TDB, ViewObjMap: Map<number, object>)
 {
     for( let seg of tdbbin.DeviceInfo['线段信息'])
     {
-       (seg as SegmentEx).SpecalData
+       //(seg as SegmentEx).SpecalData
     }
 }
 

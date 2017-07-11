@@ -7,10 +7,11 @@
             "taskName": "tsc-root",
             "command": "tsc",
             "isShellCommand": true,
-            "args": ["-w", "-p","."],
+            "args": ["-w", "-p","./src"],
             "showOutput": "silent",
             "isBackground": true,
-            "problemMatcher": "$tsc-watch"
+            "problemMatcher": "$tsc-watch",
+            "isBuildCommand": true
         },
         {
             "taskName": "tsc-client",
@@ -19,8 +20,7 @@
             "args": ["-w", "-p","src/View"],
             "showOutput": "silent",
             "isBackground": true,
-            "problemMatcher": "$tsc-watch",
-            "isBuildCommand": true
+            "problemMatcher": "$tsc-watch"
         }
     ]
 }

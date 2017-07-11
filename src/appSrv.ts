@@ -12,7 +12,6 @@ import { VectorLineToViewPolyLine } from "./TDB_View";
 let ViewSvgData, ViewRawData, viewSrv: ViewSrv, ViewObjMap: Map<number, object>
 let bindbDate: TDB;
 
-
 function isInited(): Boolean {
     for (let obj of [bindbDate, ViewObjMap]) {
         if (obj === undefined) {
