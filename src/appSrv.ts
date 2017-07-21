@@ -1,15 +1,16 @@
-import { LoadXml } from './LoadLDXml';
+import { TDBXml } from './TDBXml';
 import { ViewSrv } from "./View/ViewSrv";
 import { Config } from "./Config"
 import { TrainInfo } from "./TrainInfo"
 import { CreatMsgSrv, RemoteInfo } from "./msgSrc"
-import { Polyline } from "./ViewBase";
+import { Polyline } from "./View/ViewBase";
 import { LoadLDBbin, TDB, VectorLineP, Direction, VectorLine } from "./TDB/TDBBIN";
 import { GetObjListBetween } from "./TDB/TDBAg"
 import { VectorLineToViewPolyLine } from "./TDB_View";
+import { ViewSvgMap } from "./View/ViewSvgMap";
 
 
-let ViewSvgData, ViewRawData, viewSrv: ViewSrv, ViewObjMap: Map<number, object>
+let ViewSvgData, ViewRawData, ViewObjMap: Map<number, object>
 let bindbDate: TDB;
 
 function isInited(): Boolean {
@@ -39,16 +40,15 @@ LoadLDBbin(tdbFile, (tdbbin: TDB) => {
 })
 
 //初始化View监听
-viewSrv = new ViewSrv(atsCfg.name, atsCfg.viewPort);
+let viewSrv = new ViewSrv(atsCfg.name, atsCfg.viewPort);
+let viewsvgMap = new ViewSvgMap()
 
 //加载xml数据
-let viewdata = new LoadXml();
-viewdata.Load(atsCfg.dbFilePath, (raw, svg) => {
-    ViewRawData = raw;
-    ViewSvgData = svg
-    ViewObjMap = ViewRawData['objmap']
-    viewSrv.start(svg)
-})
+let viewdata = new TDBXml(atsCfg.dbFilePath, [result =>{
+    viewsvgMap.DumpData(result);
+    viewSrv.start(viewsvgMap.SVGMap, viewsvgMap.ObjMap)
+}]);
+
 
 //监听列车信息
 CreatMsgSrv("ATS.CC", atsCfg.CCPort, null)

@@ -1,36 +1,28 @@
-import xml2js = require('xml2js')
-import fs = require('fs')
 import util = require('util');
-import { Polyline, Point } from "./ViewBase";
-// import * as xml2js from 'xml2js';
-export interface Size {
-    'x': number; 'y': number; 'x1': number; 'y1': number;
-}
-export class LoadXml {
-    _viewSize: Size;
-    _viewRawData: object;
-    _viewSvgData: string;
-    _viewxmlfile: string;
+import fs = require('fs')
+import { Polyline, Point, Size } from "./ViewBase";
+import xml2js = require('xml2js')
+import { ITDBDump } from "../TDB/TDBDumpData";
 
-    public Load(viewxmlfile: string, func: Function = null) {
-        this._viewxmlfile = viewxmlfile
+export class ViewSvgMap implements ITDBDump{
+    private _viewSize: Size;
+    private _viewSvgData: string;
+    private _viewObjMap:Map<number, object>;
+    
+    
+    public get SVGMap() : string {
+        return this._viewSvgData;
+    }
+    
+    public get ObjMap() {
+        return this._viewObjMap
+    }
+    
+    
+    constructor() {
         this._viewSvgData = ''
-        this._viewRawData = null
         this._viewSize = { 'x': Number.MAX_VALUE, 'y': Number.MAX_VALUE, 'x1': 0, 'y1': 0 }
-
-        let xmlstr = fs.readFileSync(viewxmlfile, 'utf-8')
-
-        let parser = new xml2js.Parser({ explicitArray: false });
-        parser.parseString(xmlstr, (err, result: object) => {
-            //解析出svg
-            this._viewRawData = result
-            
-            this.BuildViewSvg(this._viewRawData)
-            if (func !== null) {
-                func(this._viewRawData, this._viewSvgData)
-            }
-        })
-
+        this._viewObjMap = new Map<number, object>()
     }
     private updateSize(points) {
         for (let p of points.split(';')) {
@@ -132,8 +124,7 @@ export class LoadXml {
         }
         this.updateSize(devView.LeftUpPoint)
     }
-    BuildViewSvg(viewData) {
-        let ViewObjMap = new Map<number, object>()
+    DumpData(viewData) {
         let svgObject = { 'svg': { 'g': [] } }
         //debug
 
@@ -161,7 +152,7 @@ export class LoadXml {
                 {
                     continue
                 } 
-                ViewObjMap.set(parseInt(devView.ID), devView)
+                this._viewObjMap.set(parseInt(devView.ID), devView)
                 let devframe = this.DBDevFrame(devView, devName)
                 if (devframe !== null) { objList.push(devframe) };
             }
@@ -181,6 +172,5 @@ export class LoadXml {
         //debug
         fs.writeFile("test1.json", JSON.stringify(svgObject), (err) => { if (err) { console.log(err) } })
         fs.writeFile("test1.svg", this._viewSvgData)
-        this._viewRawData['objmap'] = ViewObjMap
     }
 }

@@ -7,7 +7,7 @@
 		"curly": true,
 		"class-name": false,
 		"semicolon": ["always"],
-		"triple-equals": true
+		"triple-equals": false
 		
 	}
 }

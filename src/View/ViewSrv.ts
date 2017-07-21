@@ -27,7 +27,7 @@ export class ViewSrv {
             this.TotalDeviceInfo.set(viewdata.UID, viewdata)
         }
     }
-    start(svgdata: string) {
+    start(svgdata: string, svgObj) {
         let app = Express();
         app.use("/MyView", Express.static('MyView'));
         app.use("/dist", Express.static('dist'));
@@ -35,6 +35,7 @@ export class ViewSrv {
         app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
         app.use(bodyParser.json()); // for parsing application/json
         app.get('/getManView', (req: Express.Request, res: Express.Response) => res.send(svgdata))
+        app.get('/getManViewObj', (req: Express.Request, res: Express.Response) => res.send(svgObj))
         app.post('/viewCmd', (req: Express.Request, res: Express.Response) => this.defualtResp(req, res))
         let server = app.listen(this.port, () => console.log(`设备${this.srvName}的View地址为 http://%s:%s`, server.address().address, server.address().port))
     }

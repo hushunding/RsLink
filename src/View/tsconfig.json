@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "module": "es6",
+        "module": "commonjs",
         "target": "es6",
         "noImplicitAny": false,
         "sourceMap": true,
@@ -8,5 +8,7 @@
         "alwaysStrict":true
     },
      "files":
-    ["ViewClient.ts"]
+    ["ViewClient.ts",
+    "ViewSeen.ts",
+"myjsad.ts"]
 }

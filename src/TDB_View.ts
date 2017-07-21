@@ -2,7 +2,7 @@
 
 import { LocPointP, VectorLineP, SegmentEx, SwitchEx, TDB } from "./TDB/TDBBIN";
 import { GetObjListBetween } from "./TDB/TDBAg";
-import { Polyline, Point } from "./ViewBase";
+import { Polyline, Point } from "./View/ViewBase";
 
 export function LinkTDBbView(tdbbin: TDB, ViewObjMap: Map<number, object>)
 {

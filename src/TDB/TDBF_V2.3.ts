@@ -125,7 +125,7 @@ export class 安全信息区 implements IDataUnit {
 		if (Name !== "") { className = Name; } if (id && id !== 0) { className += "0x" + id.toString(16); }; return className;
 	}
 };
-class 配置分区_CfgItem implements IDataUnit {
+export class 配置分区_CfgItem implements IDataUnit {
 	public CfgName: string; 			//配置名称
 	public CfgValue: number; 			//配置值
 	DumpFormByte(bin: BIN, buf: Buffer, startIndex: RefInt): void {

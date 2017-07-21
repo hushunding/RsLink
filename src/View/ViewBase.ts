@@ -1,4 +1,7 @@
 //定义图形的基本数据
+export interface Size {
+    'x': number; 'y': number; 'x1': number; 'y1': number;
+}
 export class Point {
     x: number
     y: number
